@@ -8,14 +8,14 @@
     <script language="javascript" type="text/javascript">
         $(document).ready(function() {
             $("#button1").click(function() {
-                $.ajax({ url: "demo_test.txt", success: function(result) {
+            $.ajax({ url: "http://114.143.190.100/PGWeb/demo_test.txt", success: function(result) {
                     $("#div1").html(result);
                 }
                 });
             });
 
             $("#button2").click(function() {
-                $.ajax({ url: "Default.aspx", success: function(result) {
+                $.ajax({ url: "http://114.143.190.100/PGWeb/Home.aspx", success: function(result) {
                 $("#div1").html(result + "<br>");
                 //$("#div1").text(result);
                 }
@@ -27,7 +27,7 @@
                 var form = $(this);
                 $.ajax({
                     type: 'POST',
-                    url: 'Default.aspx',
+                    url: 'Default.aspx', // url: '/data/save',
                     data: form.serialize(),
                     dataType: 'json',
                     success: function(resp) {
