@@ -11,7 +11,7 @@
                 $.ajax({
                     crossDomain: true,
                     dataType: 'html',
-                    url: "http://114.143.190.100/PGWeb/demo_test.txt", 
+                    url: "demo_test.txt",
                     success: function(result) {
                         $("#div1").html(result);
                     }
@@ -21,7 +21,7 @@
             $("#button2").click(function() {
                 jQuery.support.cors = true;
                 $.ajax({
-                    url: "http://114.143.190.100/PGWeb/Home.aspx",
+                url: "http://114.143.190.100/PGWeb/Default.aspx",
                     crossDomain: true,
                     dataType: 'html',
                     success: function(result) {
@@ -40,13 +40,14 @@
                 $("#div1").addClass("loading");
                 //alert(1);
                 $.ajax({
-                    crossDomain: true,
-                    type: "POST",
-                    url: "http://114.143.190.100/PGWeb/MyWebService.asmx/HelloWorld",
+                    //crossDomain: true,
+                    //type: "POST",
+                url: "http://114.143.190.100/PGWeb/MyWebService.asmx/HelloWorld",
                     data: "{}",
                     dataType: "html",
                     success: function(result) {
                         //alert(result);
+                        result = result.replace('&lt;', '<').replace('&gt;', '>');
                         $("#div1").html(result + "<br>");
                         //$("#div1").text(result);
                     },
