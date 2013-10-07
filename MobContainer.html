@@ -8,25 +8,50 @@
     <script language="javascript" type="text/javascript">
         $(document).ready(function() {
             $("#button1").click(function() {
-            $.ajax({ url: "http://114.143.190.100/PGWeb/demo_test.txt", success: function(result) {
-                    $("#div1").html(result);
-                }
+                $.ajax({
+                    crossDomain: true,
+                    dataType: 'html',
+                    url: "http://114.143.190.100/PGWeb/demo_test.txt", 
+                    success: function(result) {
+                        $("#div1").html(result);
+                    }
                 });
             });
 
             $("#button2").click(function() {
                 jQuery.support.cors = true;
                 $.ajax({
-                url: "http://114.143.190.100/PGWeb/Home.aspx",
+                    url: "http://114.143.190.100/PGWeb/Home.aspx",
                     crossDomain: true,
                     dataType: 'html',
                     success: function(result) {
                         //alert(result);
-                        //$("#div1").html(result + "<br>");
-                        $("#div1").text(result);
+                        $("#div1").html(result + "<br>");
+                        //$("#div1").text(result);
                     },
                     error: function(XMLHttpRequest, textStatus, errorThrown) {
-                        alert("request" + XMLHttpRequest + "\n Status: " + textStatus + "\n" + " Error: " + errorThrown); 
+                        alert("request" + XMLHttpRequest + "\n Status: " + textStatus + "\n" + " Error: " + errorThrown);
+                    }
+                });
+            });
+
+            $("#button3").click(function() {
+                $("#div1").html('');
+                $("#div1").addClass("loading");
+                //alert(1);
+                $.ajax({
+                    crossDomain: true,
+                    type: "POST",
+                    url: "http://114.143.190.100/PGWeb/MyWebService.asmx/HelloWorld",
+                    data: "{}",
+                    dataType: "html",
+                    success: function(result) {
+                        //alert(result);
+                        $("#div1").html(result + "<br>");
+                        //$("#div1").text(result);
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        alert("request" + XMLHttpRequest + "\n Status: " + textStatus + "\n" + " Error: " + errorThrown);
                     }
                 });
             });
@@ -40,6 +65,7 @@
                     url: 'Default.aspx', // url: '/data/save',
                     data: form.serialize(),
                     dataType: 'json', //'jsonp', //html //xml, json, script, or html
+                    contentType: "application/json; charset=utf-8",
                     success: function(resp) {
                         console.log(resp);
                     }
@@ -50,7 +76,7 @@
 
 </head>
 <body>
-http://114.143.190.100/PGWeb/
+    <!-- http://114.143.190.100/PGWeb/ -->
     <form id="form1">
     <div id="div1">
         <h2>
@@ -63,6 +89,10 @@ http://114.143.190.100/PGWeb/
     <br />
     <button id="button2">
         Get External Content from .aspx
+    </button>
+    <br />
+    <button id="button3">
+        Get External Content from .ascx (web service)
     </button>
     <br />
     <button type="submit">
